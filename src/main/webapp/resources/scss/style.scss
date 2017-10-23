@@ -116,7 +116,12 @@ input.btn-input+label {
 	border: 1px $grey solid;
 	border-radius: 4px;
 	color: $font;
-	point: cursor;
+	cursor: pointer;
+}
+input.btn-input+label:hover {
+	background: $primary;
+	color: white;
+	border: 1px solid transparent;
 }
 
 input.btn-input:checked+label {
@@ -125,7 +130,3 @@ input.btn-input:checked+label {
 	border: 1px solid transparent;
 }
 
-input.btn-input+label:hover {
-	background: $primary;
-	color: white;
-}
