@@ -50,8 +50,26 @@ $(function() {
 			$btn.after(htmlContent).attr('id', id).attr('content', '');
 		});
 		
+		
+		// 로딩바
+		var $loadingDiv = $('#div-loading'),
+		$window = $(window);
+		winHeight = $(window).height(),
+		winWidth = $(window).width();
+		
+		$loadingDiv.height(winHeight);
+		$loadingImg = $loadingDiv.find('img');
+		$loadingImg.css({top: winHeight / 2 - 100, left: winWidth / 2 - 100});
+		$('.btn-forward').click(function() {
+			pageForwardAnim();
+		});
 	})();
 });
+
+var pageForwardAnim = function() {
+	console.log('abc');
+	$('div#div-loading').css({display: 'block'});
+}
 
 var innrStarHover = function(span, onmouseover) {
 	var $hoverStar = $(span),

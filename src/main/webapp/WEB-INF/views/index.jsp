@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/common.jsp" %>
 	<h1>여기여 요기</h1>
 	<h3><span class="rating" value="3" onmouseover="starHover" onclick="starClick" name="rating" ></span></h3>
 	<div id="dropzone">이미지를 여기에 드랍</div>
@@ -27,6 +28,8 @@
 	<div>
 		<label class="btn btn-default">내용</label>
 	</div>
+	
+	<a class="btn-forward btn btn-default">페이지 이동</a>
 	
 </body>
 
