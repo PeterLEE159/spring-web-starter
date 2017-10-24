@@ -67,8 +67,8 @@ $(function() {
 });
 
 var pageForwardAnim = function() {
-	console.log('abc');
-	$('div#div-loading').css({display: 'block'});
+	$div = $('div#div-loading');
+	$('div#div-loading').css({display: 'block'}).find('img').attr('src', '/resources/images/page_loading.gif');
 }
 
 var innrStarHover = function(span, onmouseover) {

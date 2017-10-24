@@ -14,5 +14,5 @@
 	}
 </style>
 <div id="div-loading">
-	<img src="/resources/images/page_loading.gif"/>
+	<img/>
 </div>
