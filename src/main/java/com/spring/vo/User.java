@@ -6,7 +6,7 @@ public class User {
 	private String id;
 	private String username;
 	private String password;
-	private Date date;
+	private Date created_at;
 	public String getId() {
 		return id;
 	}
@@ -25,12 +25,18 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Date getDate() {
-		return date;
+	public Date getCreated_at() {
+		return created_at;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
 	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", created_at=" + created_at
+				+ "]";
+	}
+	
 	
 	
 }

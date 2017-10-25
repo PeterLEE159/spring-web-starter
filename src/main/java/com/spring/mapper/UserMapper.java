@@ -7,4 +7,5 @@ import com.spring.vo.User;
 public interface UserMapper {
 	void create(User user);
 	List<User> readAll();
+	User readByUsername(String username);
 }

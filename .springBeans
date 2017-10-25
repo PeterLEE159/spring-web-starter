@@ -11,7 +11,6 @@
 		<config>src/main/webapp/WEB-INF/spring/database.xml</config>
 	</configs>
 	<autoconfigs>
-		<config>src/main/webapp/WEB-INF/spring/root-context.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
