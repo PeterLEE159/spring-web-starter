@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.spring.mapper.SQLMapper">
+	
+	<select id="select" parameterType="sqlBuilder" resultType="hashmap">
+		
+		select
+			<if test="builder.fetchedColumns != null">
+				<foreach collection="builder.fetchedColumns" item="column" separator=", ">
+					${column}
+				</foreach> 
+			</if>
+			<if test="builder.fetchedColumns == null">
+				*
+			</if>
+		from 
+			${builder.tableName}
+		<if test="builder.where != null">
+			<where>
+				<foreach collection="builder.where" item="each">
+					${each.next} ${each.column} ${each.symbol} 
+					<if test="each.value != null">
+						#{each.value}
+					</if>
+				</foreach>
+			</where>
+		</if>
+		<if test="builder.orderBy != null">
+			${builder.orderBy}
+		</if>
+	</select>
+	
+	<select id="selectLimit" parameterType="sqlBuilder" resultType="hashmap">
+		select * 
+		from (
+			select
+				row_number() over ${rangeColumn} rn,
+				<if test="builder.fetchedColumns != null">
+					<foreach collection="builder.fetchedColumns" item="column" separator=", ">
+						${column}
+					</foreach> 
+				</if>
+				<if test="builder.fetchedColumns == null">
+					*
+				</if>
+			from 
+				${builder.tableName}
+			<if test="builder.where != null">
+				<where>
+					<foreach collection="builder.where" item="each">
+						${each.next} ${each.column} ${each.symbol} 
+						<if test="each.value != null">
+							#{each.value}
+						</if>
+					</foreach>
+				</where>
+			</if>
+			<if test="builder.orderBy != null">
+				${builder.orderBy}
+			</if>
+		)
+		<where>
+			rn &gt;= ${builder.beginIndex} and rn &lt;= ${builder.endIndex}
+		</where>
+		
+	</select>
+	
+	
+	
+	<select id="nextId" parameterType="string" resultType="int">
+		select seq_${value}.nextval
+		from dual
+	</select>
+	
+	
+	<insert id="insert" parameterType="sqlBuilder">
+		insert into ${builder.tableName} 
+		<foreach collection="builder.insertColumns" item="column" separator=", " open="(" close=")">
+			${column}
+		</foreach>
+		values
+		<foreach collection="builder.insertValues" item="value" separator=", " open="(" close=")">
+			#{value}
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterType="sqlBuilder">
+		update ${builder.tableName}
+		<set>
+			<foreach collection="builder.setList" item="set" separator=", ">
+				${set.column} = #{set.value}
+			</foreach>
+		</set>
+		<where>
+			<foreach collection="builder.where" item="each">
+				${each.next} ${each.column} ${each.symbol} 
+				<if test="each.value != null">
+					#{each.value}
+				</if>
+			</foreach>
+		</where>
+	</update>
+	
+	<delete id="delete" parameterType="sqlBuilder">
+		delete from ${builder.tableName}
+		<where>
+			<foreach collection="builder.where" item="each">
+				${each.next} ${each.column} ${each.symbol} 
+				<if test="each.value != null">
+					#{each.value}
+				</if>
+			</foreach>
+		</where>
+	</delete>
+	
+	<select id="method" parameterType="sqlBuilder" resultType="object">
+		select 
+			${builder.groupByMethod}(${builder.groupByColumn})
+		from 
+			${builder.tableName}
+		<if test="builder.where != null">
+			<where>
+				<foreach collection="builder.where" item="each">
+					${each.next} ${each.column} ${each.symbol} 
+					<if test="each.value != null">
+						#{each.value}
+					</if>
+				</foreach>
+			</where>
+		</if>
+	</select>
+	
+	<select id="groupby" parameterType="sqlBuilder" resultType="hashmap">
+		select 
+			${builder.groupByColumn}, 
+			${builder.groupByMethod}(${builder.groupByTarget}) AS ${builder.groupByMethod}
+		from 
+			${builder.tableName}
+		<if test="builder.where != null">
+			<where>
+				<foreach collection="builder.where" item="each">
+					${each.next} ${each.column} ${each.symbol} 
+					<if test="each.value != null">
+						#{each.value}
+					</if>
+				</foreach>
+			</where>
+		</if>
+		group by ${builder.groupByColumn}
+	</select>
+	
+	
+	
+</mapper>

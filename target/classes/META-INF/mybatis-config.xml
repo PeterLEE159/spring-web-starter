@@ -6,10 +6,12 @@
 <configuration>
     <typeAliases>
         <typeAlias alias="user" type="com.spring.vo.User"/>
+        <typeAlias alias="sqlBuilder" type="com.spring.vo.SQLBuilder"/>
     </typeAliases>
     
     <mappers>
         <mapper resource="META-INF/mapper/user.xml" />
+        <mapper resource="META-INF/mapper/sql.xml" />
     </mappers>
     
 </configuration>

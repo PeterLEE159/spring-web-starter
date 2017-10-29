@@ -17,7 +17,12 @@
 $primary: #2fa4e7;
 $grey: #CDCDCD;
 $font: #333333;
-
+.top-margin {
+	margin-top: 32px;
+}
+.left-margin {
+	margin-top: 32px;
+}
 .rating {
 	unicode-bidi: bidi-override;
 	direction: rtl;
